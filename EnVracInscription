@@ -1,0 +1,86 @@
+<?php include("header.php") ?>
+
+		<form action="inscription.php" method="post">
+			<input type="submit" placeholder="inscription">
+		</form>
+<?php include("footer.php") ?>	
+
+
+
+-------------------
+
+
+<?php include('header.php'); ?>
+
+
+		<form action="enregistrer.php" method="post">
+			<input type="text" name="pseudo" placeholder="pseudo">
+			<input type="text" name="motdepasse" placeholder="motdepasse">
+			<input type="text" name="email" placeholder="email">
+			<input type="submit" placeholder="envoyer">
+		</form>
+
+
+	<?php include("footer.php") ?>
+	
+	------------------------------------
+	
+<?php
+
+include('header.php');
+include('connect.php');
+
+	if ( count($_POST) > 0){
+
+		$sql = "INSERT INTO
+					login
+				(
+					`pseudo`,
+					`email`,
+					`motdepasse`
+				)
+
+				VALUES
+				(
+					'".$_POST['pseudo']."',
+					'".$_POST['email']."',
+					'".$_POST['motdepasse']."'
+				);";
+
+		echo $sql;
+
+		if( !($db->query( $sql ))){
+			echo "Echec de l'insertion";
+		} else {
+			echo "Enregistrement insere: "
+				.$_POST['pseudo']."' , '"
+				.$_POST['email']."' , '"
+				.$_POST['motdepasse']."'";
+		}
+	}
+	
+	include('footer.php');
+
+?>
+
+
+
+---------------------
+
+
+<p>Bonjour</p>
+
+</body>
+</html>
+
+
+------------------------
+
+
+
+<?php
+	//fichier a insérer qui sert à se connecter a la base de donnée.
+    $db = new mysqli( 'localhost' , 'root', 'root' , 'warcats' );
+	if( $db->connect_errno ){
+		die( $db->connect_error );
+	}
