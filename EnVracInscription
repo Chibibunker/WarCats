@@ -47,8 +47,6 @@ include('connect.php');
 					'".$_POST['motdepasse']."'
 				);";
 
-		echo $sql;
-
 		if( !($db->query( $sql ))){
 			echo "Echec de l'insertion";
 		} else {
